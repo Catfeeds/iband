@@ -32,11 +32,7 @@ public class AppGlobal {
     public static final String DATA_BATTERY_STATE = "data_battery_state";
     public static final String DATA_SYNC_TIME = "data_sync_time";
 
-
-    public static final int DEVICE_STATE_UNBIND = 0;
-    public static final int DEVICE_STATE_UNCONNECT = 1;
-    public static final int DEVICE_STATE_CONNECTED = 2;
-    public static final int DEVICE_STATE_CONNECTING = 3;
-    public static final int DEVICE_STATE_UNFIND = 4;
-
+    public static final int DEVICE_UNCONNECT = 0;
+    public static final int DEVICE_CONNECTED = 1;
+    public static final int DEVICE_CONNECTING = 2;
 }
