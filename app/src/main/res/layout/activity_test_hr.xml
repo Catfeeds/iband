@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#f5f5f5">
+    <include layout="@layout/tab_activity"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_history"
+        android:layout_width="match_parent"
+        android:layout_height="248dp">
+        <TextView
+            android:id="@+id/tv_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="22dp"
+            android:textColor="#8a000000"
+            android:textSize="12sp"
+            android:text="上次测量结果"/>
+
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/tv_hint"
+            android:textColor="#de000000"
+            android:textSize="48sp"
+            android:text="68"/>
+
+
+
+        <TextView
+            android:id="@+id/tv_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tv_num"
+            android:layout_marginTop="75dp"
+            android:layout_marginLeft="8dp"
+            android:textColor="#de000000"
+            android:textSize="10sp"
+            android:text="次/分"/>
+
+        <TextView
+            android:id="@+id/line"
+            android:layout_width="150dp"
+            android:layout_height="1px"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/tv_num"
+            android:background="#de000000"/>
+
+        <Button
+            android:id="@+id/bt_test"
+            android:layout_width="92dp"
+            android:layout_height="36dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/line"
+            android:layout_marginTop="12dp"
+            android:textSize="14sp"
+            android:textColor="#de000000"
+            android:text="开始测量"
+            android:background="@drawable/shape_button_alert"/>
+
+
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="136dp"
+            android:textColor="#de000000"
+            android:textSize="14dp"
+            android:text="本月"/>
+
+        <LinearLayout android:orientation="horizontal"
+                      android:layout_width="match_parent"
+                      android:layout_height="72dp"
+                      android:layout_alignParentBottom="true">
+
+            <com.manridy.iband.ui.items.DataItems
+                android:id="@+id/di_data1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:line_color="#26ef5350"
+                app:data_type="left"
+                app:data_hint="平均心率"
+                app:data_unit="次/分"
+                app:data="78"/>
+
+
+
+            <com.manridy.iband.ui.items.DataItems
+                android:id="@+id/di_data2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:line_color="#26ef5350"
+                app:data_type="center"
+                app:data_hint="最低心率"
+                app:data_unit="次/分"
+                app:data="57"/>
+
+
+
+            <com.manridy.iband.ui.items.DataItems
+                android:id="@+id/di_data3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:line_color="#26ef5350"
+                app:data_type="right"
+                app:data_hint="最高心率"
+                app:data_unit="次/分"
+                app:data="115"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:textColor="@color/text_title"
+        android:textSize="14sp"
+        android:text="测量过程中请使手表与手机保持一致"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/line_background"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_history"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

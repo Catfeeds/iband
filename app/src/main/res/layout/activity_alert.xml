@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/activity_background">
+    <include layout="@layout/tab_activity"/>
+
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="150dp"
+         android:orientation="horizontal">
+        <com.manridy.iband.ui.items.AlertMenuItems
+            android:id="@+id/menu_phone"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:alert_icon="@mipmap/remind_phone01"
+            app:alert_name="来电提醒"/>
+
+         <TextView
+             android:layout_width="1px"
+             android:layout_height="match_parent"
+             android:background="@color/line_background"/>
+
+
+         <com.manridy.iband.ui.items.AlertMenuItems
+             android:id="@+id/menu_sms"
+             android:layout_width="0dp"
+             android:layout_height="match_parent"
+             android:layout_weight="1"
+             app:alert_icon="@mipmap/remind_mgs01"
+             app:alert_name="短信提醒"/>
+     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line_background"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal">
+        <com.manridy.iband.ui.items.AlertMenuItems
+            android:id="@+id/menu_sedentary"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:alert_icon="@mipmap/remind_sit01"
+            app:alert_name="久坐提醒"/>
+
+        <TextView
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/line_background"/>
+
+        <com.manridy.iband.ui.items.AlertMenuItems
+            android:id="@+id/menu_clock"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:alert_icon="@mipmap/remind_alarm01"
+            app:alert_name="闹钟提醒"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line_background"/>
+
+    <Button
+        android:id="@+id/bt_alert_more"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shape_button_alert"
+        android:textColor="@color/text_hint_tint"
+        android:textSize="12sp"
+        android:text="更多"/>
+</LinearLayout>

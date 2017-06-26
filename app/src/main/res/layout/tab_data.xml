@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="72dp"
+              android:layout_marginTop="8dp"
+              android:layout_marginBottom="8dp">
+
+    <com.manridy.iband.ui.items.DataItems
+        android:id="@+id/di_data1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:data_type="left"
+        app:data_hint="步数"
+        app:data_unit="步"
+        app:data="--"/>
+
+    <com.manridy.iband.ui.items.DataItems
+        android:id="@+id/di_data2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:data_type="center"
+        app:data_hint="里程"
+        app:data_unit="公里"
+        app:data="--"/>
+
+    <com.manridy.iband.ui.items.DataItems
+        android:id="@+id/di_data3"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:data_type="right"
+        app:data_hint="卡路里"
+        app:data_unit="千卡"
+        app:data="--"/>
+
+</LinearLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/activity_background">
+    <include layout="@layout/tab_activity"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
+    <com.manridy.iband.ui.items.MenuItems
+        android:id="@+id/menu_sedentary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menus_icon="@mipmap/remind_sit02"
+        app:menus_name="久坐提醒"/>
+
+    <com.manridy.iband.ui.items.MenuItems
+        android:id="@+id/menu_clock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menus_icon="@mipmap/remind_alarm02"
+        app:menus_name="闹钟提醒"/>
+
+    <com.manridy.iband.ui.items.MenuItems
+        android:id="@+id/menu_sms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menus_icon="@mipmap/remind_mgs02"
+        app:menus_name="短信提醒"/>
+
+    <com.manridy.iband.ui.items.MenuItems
+        android:id="@+id/menu_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menus_icon="@mipmap/remind_phone02"
+        app:menus_name="来电提醒"/>
+
+    <com.manridy.iband.ui.items.MenuItems
+        android:id="@+id/menu_lost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menus_icon="@mipmap/remind_antilost"
+        app:menus_name="防丢提醒"/>
+
+    <com.manridy.iband.ui.items.MenuItems
+        android:id="@+id/menu_app"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menus_icon="@mipmap/remind_app"
+        app:menus_name="APP提醒"
+        android:visibility="visible"/>
+
+
+</LinearLayout>

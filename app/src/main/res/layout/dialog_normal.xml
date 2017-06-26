@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              android:layout_marginLeft="16.0dip"
+              android:id="@+id/llRoot"
+              android:layout_marginRight="16.0dip"
+              android:background="@drawable/shape_bg_white"
+              android:gravity="center"
+              android:orientation="vertical">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25.0dip"
+        android:gravity="center"
+        android:text="升级提醒"
+        android:textSize="16.0sp"/>
+
+    <TextView
+        android:id="@+id/tvDesc"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24.0dip"
+        android:gravity="center"
+        android:text="当前腕表有新版本固件，是否升级?"
+        android:textSize="14.0sp"/>
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/permission_container"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="24.0dip"-->
+    <!--android:layout_marginRight="24.0dip"-->
+    <!--android:layout_marginTop="24.0dip"-->
+    <!--android:divider="@drawable/spacer_30"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:showDividers="middle"/>-->
+
+
+
+    <!--<View-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="1.0dip"-->
+    <!--android:layout_marginTop="30.0dip"-->
+    <!--android:src="#ffdddddd"/>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginBottom="12.0dip"
+        android:layout_marginLeft="16.0dip"
+        android:layout_marginRight="16.0dip"
+        android:layout_marginTop="12.0dip"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/goto_cancel"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:textColor="#de000000"
+            android:layout_marginRight="8dp"
+            android:textSize="14.0sp"
+            android:text="下次再说"/>
+        <Button
+            android:id="@+id/goto_now"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="8dp"
+            android:textColor="#de000000"
+            android:textSize="14.0sp"
+            android:text="立即更新"/>
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion '25.0.0'
+    defaultConfig {
+        applicationId "com.manridy.iband"
+        minSdkVersion 18
+        targetSdkVersion 24
+        versionCode 12
+        versionName "1.2.9"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+apply plugin: 'com.neenbedankt.android-apt'//增加这一句
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:design:24.2.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
+    compile project(':appLib')
+    compile project(':bleLib')
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'//图表
+    compile 'org.greenrobot:eventbus:3.0.0'//eventbus
+    compile 'com.squareup.okhttp3:okhttp:3.5.0'//okHttp
+    compile 'org.litepal.android:core:1.3.2'//数据库
+    compile 'cn.yipianfengye.android:zxing-library:2.1'//二维码
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile 'com.jakewharton:butterknife:8.4.0'//view注释
+    compile 'me.weyye.hipermission:library:1.0.3'//权限
+    compile 'com.facebook.fresco:fresco:1.3.0'//图片
+
+
+    compile 'com.romandanylyk:pageindicatorview:0.0.5'//ViewPager圆点指示器
+    compile 'com.github.Jay-Goo:RangeSeekBar:v1.0.0'//选择器
+    compile 'com.github.liuguangli:FloatUtil:1.0'//悬浮窗
+    debugCompile ('com.amitshekhar.android:debug-db:1.0.0')
+            {exclude group: 'com.google.code.gson'}//数据库查看
+    compile 'com.baoyz.pullrefreshlayout:library:1.2.0'//下拉刷新
+    compile ('no.nordicsemi.android:dfu:1.3.0')//nordic ota升级
+            {exclude group: 'com.google.code.gson'}
+    compile 'com.tencent.bugly:crashreport_upgrade:latest.release'//远程升级
+
+
+
+//    compile 'com.tencent.bugly:crashreport:latest.release'//bugly
+//    compile 'skin.support:skin-support:1.2.6'// skin-support 基础控件支持 //换肤
+
+}

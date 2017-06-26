@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:background="#673ab7"/>
+    <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@mipmap/line"/>-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="288dp"
+        android:background="#673ab7">
+        <com.manridy.iband.ui.CircularView
+            android:id="@+id/cv_sleep"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            app:cv_background_color="#26ffffff"
+            app:cv_progressbar_color="#deffffff"
+            app:cv_title="今日睡眠"
+            app:cv_text="--"
+            app:cv_unit="小时"
+            app:cv_state="深睡--小时/浅睡--小时"
+            app:cv_progress="0.5"
+            app:cv_icon="@mipmap/sleep_icon01"/>
+
+        <ImageView
+            android:id="@+id/iv_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/all_history"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="13dp"
+            android:paddingRight="16dp"/>
+    </RelativeLayout>
+
+    <LinearLayout android:orientation="horizontal"
+                  android:layout_width="match_parent"
+                  android:layout_height="72dp"
+                  android:layout_marginTop="8dp"
+                  android:layout_marginBottom="8dp">
+
+        <com.manridy.iband.ui.items.DataItems
+            android:id="@+id/di_data1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:data_type="left"
+            app:data_hint="昨晚入睡"
+            app:data="--"/>
+
+        <com.manridy.iband.ui.items.DataItems
+            android:id="@+id/di_data2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:data_type="center"
+            app:data_hint="今天醒来"
+            app:data="--"/>
+
+        <com.manridy.iband.ui.items.DataItems
+            android:id="@+id/di_data3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:data_type="right"
+            app:data_hint="清醒时长"
+            app:data_unit="小时"
+            app:data="--"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dp"
+            android:background="#16000000">
+            <com.manridy.iband.ui.ChartView
+                android:id="@+id/chart_sleep"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/tv_time_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="3dp"
+            android:textColor="#8a000000"
+            android:textSize="10sp"
+            android:text="00:00"/>
+        <TextView
+            android:id="@+id/tv_time_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="3dp"
+            android:textColor="#8a000000"
+            android:textSize="10sp"
+            android:text="23:59"/>
+    </RelativeLayout>
+
+
+</LinearLayout>

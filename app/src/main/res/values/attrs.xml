@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MenuItems">
+        <attr name="menus_icon" format="reference"/>
+        <attr name="menus_name" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="AlertMenuItems">
+        <attr name="alert_icon" format="reference"/>
+        <attr name="alert_name" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="UnitItems">
+        <attr name="unit_text" format="string"/>
+        <attr name="unit_select" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="HelpItems">
+        <attr name="help_name" format="string"/>
+        <attr name="help_name_color" format="color"/>
+        <attr name="help_content_color" format="color"/>
+        <attr name="help_bt_color" format="color"/>
+        <attr name="help_content" format="string"/>
+        <attr name="help_bt" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="AlertItems">
+        <attr name="alert_names" format="string"/>
+        <attr name="alert_text" format="string"/>
+        <attr name="alert_img" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="ClockItems">
+        <attr name="clock_time" format="string"/>
+        <attr name="clock_hint" format="string"/>
+        <attr name="clock_onoff" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="AlertBigItems">
+        <attr name="big_name" format="string"/>
+        <attr name="big_hint" format="string"/>
+        <attr name="big_onoff" format="boolean"/>
+        <attr name="big_line" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="DataItems">
+        <attr name="data_hint" format="string"/>
+        <attr name="data_unit" format="string"/>
+        <attr name="data_hint_color" format="color"/>
+        <attr name="data_color" format="color"/>
+        <attr name="line_color" format="color"/>
+        <attr name="data_type" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
+        <attr name="data" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="CircularView">
+        <attr name="cv_progress" format="float"/>
+        <attr name="cv_progressbar_color" format="color"/>
+        <attr name="cv_background_color" format="color"/>
+        <attr name="cv_text_color" format="color"/>
+        <attr name="cv_hint_color" format="color"/>
+        <attr name="cv_text" format="string"/>
+        <attr name="cv_title" format="string"/>
+        <attr name="cv_state" format="string"/>
+        <attr name="cv_unit" format="string"/>
+        <attr name="cv_icon" format="reference"/>
+        <attr name="cv_stroke_width" format="float"/>
+        <attr name="cv_text_size" format="float"/>
+    </declare-styleable>
+</resources>

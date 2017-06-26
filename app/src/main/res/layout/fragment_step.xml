@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:background="#2196f3"/>
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1px"-->
+        <!--android:background="#0cffffff"/>-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="288dp"
+        android:background="#2196f3">
+        <com.manridy.iband.ui.CircularView
+            android:id="@+id/cv_step"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            app:cv_background_color="#26ffffff"
+            app:cv_progressbar_color="#deffeb3b"
+            app:cv_icon="@mipmap/all_walkicon"
+            app:cv_title="今日步数"
+            app:cv_text="--"
+            app:cv_unit="步"
+            app:cv_state="--公里/--大卡"
+            app:cv_progress="0.5"/>
+
+        <ImageView
+            android:id="@+id/iv_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/all_history"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="13dp"
+            android:paddingRight="16dp"/>
+
+        <ImageView
+            android:id="@+id/iv_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@id/iv_history"
+            android:paddingRight="8dp"
+            android:paddingBottom="13dp"
+            android:src="@mipmap/walk_walkicon"/>
+    </RelativeLayout>
+
+    <include layout="@layout/tab_data"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/bc_step"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"
+        android:background="#16000000"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="3dp"
+            android:textColor="#8a000000"
+            android:textSize="10sp"
+            android:text="00:00"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="3dp"
+            android:textColor="#8a000000"
+            android:textSize="10sp"
+            android:text="23:59"/>
+    </RelativeLayout>
+</LinearLayout>

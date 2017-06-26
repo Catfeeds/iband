@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:attrs="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/activity_background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="#2196f3"/>
+        <com.baoyz.widget.PullRefreshLayout
+            android:id="@+id/prl_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:refreshType="material">
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_model"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        </com.baoyz.widget.PullRefreshLayout>
+        <com.rd.PageIndicatorView
+            android:id="@+id/piv_dots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="332dp"
+            app:piv_radius="3dp"
+            app:piv_animationType="worm"
+            app:dynamicCount="true"/>
+        <RelativeLayout
+            android:id="@+id/rl_title"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp">
+            <TextView
+                android:id="@+id/tb_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/color_white"
+                android:textSize="18sp"
+                android:text="计步"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"/>
+
+
+
+            <ImageView
+                android:id="@+id/tb_set"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/all_set"/>
+
+            <TextView
+                android:id="@+id/tb_sync"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:textColor="#8affffff"
+                android:textSize="10sp"
+                android:text=""/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

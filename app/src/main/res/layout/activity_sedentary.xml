@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/activity_background">
+    <include layout="@layout/tab_activity"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:background="@color/toolbar_background">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/sit_alarm"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="17dp"
+            android:textColor="#89ffffff"
+            android:textSize="14sp"
+            android:text="持续一小时静坐,手环会震动提醒"/>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="#26000000"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.manridy.iband.ui.items.AlertItems
+                android:id="@+id/ai_onoff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:alert_names="开始久坐提醒"
+                app:alert_img="@mipmap/ic_off"/>
+
+            <com.manridy.iband.ui.items.AlertItems
+                android:id="@+id/ai_start_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:alert_names="开始时间"
+                app:alert_text="09:00"
+                app:alert_img="@mipmap/ic_chevron_right"/>
+
+            <com.manridy.iband.ui.items.AlertItems
+                android:id="@+id/ai_end_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:alert_names="结束时间"
+                app:alert_text="21:00"
+                app:alert_img="@mipmap/ic_chevron_right"/>
+
+            <com.manridy.iband.ui.items.AlertBigItems
+                android:id="@+id/ai_nap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:big_name="午休时间"
+                app:big_hint="12:00~14:00不进行提醒"
+                app:big_onoff="false"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

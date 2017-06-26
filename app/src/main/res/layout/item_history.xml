@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentBottom="true"
+        android:background="#26000000"/>
+
+    <TextView
+        android:id="@+id/tv_menu_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textColor="@color/text_title"
+        android:textSize="14sp"
+        android:text="5月9日"/>
+
+
+    <TextView
+        android:id="@+id/tv_menu_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="@color/text_title"
+        android:textSize="14sp"
+        android:text="13:46"
+        android:visibility="visible"/>
+
+    <TextView
+        android:id="@+id/tv_menu_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="27dp"
+        android:textColor="@color/text_title"
+        android:textSize="8sp"
+        android:text="次/分钟"
+        android:visibility="visible"/>
+
+    <TextView
+        android:id="@+id/tv_menu_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/tv_menu_unit"
+        android:textColor="@color/text_title"
+        android:textSize="17sp"
+        android:text="78"
+        android:visibility="visible"/>
+
+</RelativeLayout>

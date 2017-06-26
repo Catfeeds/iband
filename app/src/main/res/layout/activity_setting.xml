@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/activity_background">
+
+    <include layout="@layout/tab_activity"/>
+    <ScrollView
+        android:id="@+id/sv_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/iv_user_icon"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="13dp"
+                app:actualImageScaleType="fitXY"
+                app:placeholderImage="@mipmap/set_avatar"
+                app:roundAsCircle="true"/>
+            <RelativeLayout
+                android:id="@+id/rl_user_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+                <TextView
+                    android:id="@+id/tv_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/text_name"
+                    android:textSize="16sp"
+                    android:text="cecboy"/>
+
+                <TextView
+                    android:id="@+id/tv_hint_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/tv_user_name"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/text_hint"
+                    android:textSize="14sp"
+                    android:text="用户信息"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tv_hint_name"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginLeft="6dp"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_chevron_right"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/text_title"
+                android:textSize="14sp"
+                android:text="设备连接"/>
+
+
+            <include layout="@layout/item_device"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="#26000000"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:textColor="#8a000000"
+                android:textSize="14sp"
+                android:text="功能设置"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#26000000"/>
+
+            <com.manridy.iband.ui.items.MenuItems
+                android:id="@+id/menu_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:menus_icon="@mipmap/set_interface"
+                app:menus_name="界面选择"/>
+
+            <com.manridy.iband.ui.items.MenuItems
+                android:id="@+id/menu_camera"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:menus_icon="@mipmap/set_camera"
+                app:menus_name="遥控拍照"/>
+
+            <com.manridy.iband.ui.items.MenuItems
+                android:id="@+id/menu_find"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:menus_icon="@mipmap/set_find"
+                app:menus_name="查找手环"/>
+
+            <com.manridy.iband.ui.items.MenuItems
+                android:id="@+id/menu_alert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:menus_icon="@mipmap/set_phone"
+                app:menus_name="提醒功能"/>
+
+            <com.manridy.iband.ui.items.MenuItems
+                android:id="@+id/menu_wechat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:menus_icon="@mipmap/set_wechat"
+                app:menus_name="微信运动"/>
+
+            <com.manridy.iband.ui.items.MenuItems
+                android:id="@+id/menu_light"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:menus_icon="@mipmap/set_dimming"
+                app:menus_name="亮度调节"/>
+
+            <com.manridy.iband.ui.items.MenuItems
+                android:id="@+id/menu_unit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:menus_icon="@mipmap/set_unit"
+                app:menus_name="单位设置"/>
+
+            <com.manridy.iband.ui.items.MenuItems
+                android:id="@+id/menu_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:menus_icon="@mipmap/set_time"
+                app:menus_name="时间格式"/>
+
+            <com.manridy.iband.ui.items.MenuItems
+                android:id="@+id/menu_target"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:menus_icon="@mipmap/set_goal"
+                app:menus_name="目标设置"/>
+
+            <com.manridy.iband.ui.items.MenuItems
+                android:id="@+id/menu_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:menus_icon="@mipmap/set_info"
+                app:menus_name="关于"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

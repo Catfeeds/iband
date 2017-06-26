@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AppLib</string>
+    <string name="error">很抱歉,程序出现异常,即将退出</string>
+
+</resources>

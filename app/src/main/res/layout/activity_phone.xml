@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/activity_background">
+    <include layout="@layout/tab_activity"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:background="@color/toolbar_background">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/call_reminder_pic"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="17dp"
+            android:textColor="#89ffffff"
+            android:textSize="14sp"
+            android:text="请保持蓝牙开启，并且手环与手机保持连接"/>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="#26000000"/>
+
+    <com.manridy.iband.ui.items.AlertBigItems
+        android:id="@+id/ai_alert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:big_name="开启来电提醒"
+        app:big_hint="手机来电时，手表会振动提醒"
+        app:big_onoff="true"/>
+</LinearLayout>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include layout="@layout/tab_activity"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#009688">
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="#86ffffff"
+            android:textSize="12sp"
+            android:text="2017年5月2日"/>
+
+        <ImageView
+            android:id="@+id/iv_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/tv_time"
+            android:layout_marginRight="8dp"
+            android:src="@mipmap/train_pre"/>
+
+        <ImageView
+            android:id="@+id/iv_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_time"
+            android:layout_marginLeft="8dp"
+            android:src="@mipmap/train_next"/>
+
+        <ImageView
+            android:id="@+id/iv_cal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/iv_right"
+            android:layout_marginLeft="8dp"
+            android:src="@mipmap/train_calendar"/>
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_hint"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:gravity="center"
+        android:textColor="#86ffffff"
+        android:background="#009688"
+        android:textSize="12sp"
+        android:text=""/>
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/bc_run"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="#009688"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:background="#0c000000">
+        <TextView
+            android:id="@+id/tv_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:textSize="10sp"
+            android:textColor="@color/text_hint_tint"
+            android:text="00:00"/>
+
+        <TextView
+            android:id="@+id/tv_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:textSize="10sp"
+            android:textColor="@color/text_hint_tint"
+            android:text="23:59"/>
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_train"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

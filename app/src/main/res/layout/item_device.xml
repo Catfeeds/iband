@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:id="@+id/rl_device">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentTop="true"
+        android:background="@color/line_background"/>
+
+    <ImageView
+        android:id="@+id/iv_device_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/set_product01"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/tv_device_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/iv_device_icon"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/text_device_name"
+        android:textSize="16sp"
+        android:text="X9Plus"/>
+
+    <TextView
+        android:id="@+id/tv_device_bind_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/iv_device_icon"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="16dp"
+        android:textColor="@color/text_device_hint"
+        android:textSize="12sp"
+        android:text="已绑定"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="14dp"
+        android:layout_marginRight="4dp"
+        android:src="@mipmap/ic_chevron_right"/>
+
+    <TextView
+        android:id="@+id/tv_device_connect_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="18dp"
+        android:textColor="@color/text_device_hint"
+        android:textSize="12sp"
+        android:text="未连接"/>
+
+    <TextView
+        android:id="@+id/tv_device_battery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@id/tv_device_connect_state"
+        android:layout_marginBottom="16dp"
+        android:textColor="@color/text_device_hint"
+        android:textSize="12sp"/>
+
+
+    <TextView
+        android:id="@+id/tv_un_bind"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="1dp"
+        android:gravity="center"
+        android:drawableLeft="@mipmap/set_add"
+        android:paddingLeft="115dp"
+        android:drawablePadding="-115dp"
+        android:background="@color/activity_background"
+        android:text="绑定新设备"
+        android:visibility="visible"/>
+</RelativeLayout>

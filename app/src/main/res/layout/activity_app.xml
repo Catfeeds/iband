@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/activity_background">
+
+        <include layout="@layout/tab_activity"/>
+
+    <com.manridy.iband.ui.items.AlertBigItems
+        android:id="@+id/ai_alert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:big_name="开启APP应用提醒"
+        app:big_hint="手机APP应用通知时，手表会振动提醒"
+        app:big_onoff="false"
+        app:big_line="false"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingLeft="16dp"
+            android:gravity="center_vertical"
+            android:background="#10000000"
+            android:textColor="@color/text_title"
+            android:textSize="14sp"
+            android:text="选择需要提醒的应用APP"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_app"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <!--<com.manridy.iband.ui.items.MenuItems-->
+        <!--android:id="@+id/menu_wechat"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:menus_icon="@mipmap/appremind_wechat"-->
+        <!--app:menus_name="微信"/>-->
+
+    <!--<com.manridy.iband.ui.items.MenuItems-->
+        <!--android:id="@+id/menu_qq"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:menus_icon="@mipmap/appremind_qq"-->
+        <!--app:menus_name="QQ"/>-->
+
+    <!--<com.manridy.iband.ui.items.MenuItems-->
+        <!--android:id="@+id/menu_whatsapp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:menus_icon="@mipmap/appremind_whatsapp"-->
+        <!--app:menus_name="WhatsApp"/>-->
+
+    <!--<com.manridy.iband.ui.items.MenuItems-->
+        <!--android:id="@+id/menu_facebook"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:menus_icon="@mipmap/appremind_facebook"-->
+        <!--app:menus_name="Facebook"/>-->
+</LinearLayout>

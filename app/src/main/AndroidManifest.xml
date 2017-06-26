@@ -1,0 +1,122 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.manridy.iband">
+
+    <!-- 蓝牙操作权限 -->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <!-- 写入文件权限 6.0以上需要动态授权-->
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 读取短信 6.0以上需要动态授权-->
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <!--读取手机状态 6.0以上需要动态授权-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <!--读取联系人 6.0以上需要动态授权-->
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <!--震动-->
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <!--定位 6.0以上需要动态授权-->
+    <uses-permission-sdk-23 android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission-sdk-23 android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!--网络or其他-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.MODIFY_PHONE_STATE" />
+    <uses-permission android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"/>
+
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true"/>
+
+
+    <application
+        android:name=".IbandApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/app_icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppThemes">
+        <service android:name=".service.BleService"/>
+        <service android:name=".service.AlertService"/>
+        <service android:name=".service.DfuService"/>
+        <service android:name=".service.NotificationService2"
+                 android:label="@string/app_name"
+                 android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+        <provider
+            android:authorities="com.manridy.iband.fileprovider"
+            android:name="android.support.v4.content.FileProvider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent" />
+        <activity android:name=".view.StartActivity"
+                  android:theme="@style/startActivityTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.MainActivity"
+                  android:theme="@style/Theme.NoBackgroundAndTitleMain"
+                  android:launchMode="singleTask"/>
+        <activity android:name=".view.SettingActivity"/>
+        <activity android:name=".view.WelcomeActivity"/>
+        <activity android:name=".view.setting.ViewActivity"/>
+        <activity android:name=".view.setting.CameraActivity"/>
+        <activity android:name=".view.setting.FindActivity"/>
+        <activity android:name=".view.setting.AlertActivity"/>
+        <activity android:name=".view.setting.WechatActivity"/>
+        <activity android:name=".view.setting.LightActivity"/>
+        <activity android:name=".view.setting.UnitActivity"/>
+        <activity android:name=".view.setting.TimeActivity"/>
+        <activity android:name=".view.setting.TargetActivity"/>
+        <activity android:name=".view.setting.AboutActivity"/>
+        <activity android:name=".view.setting.UpdateActivity"/>
+        <activity android:name=".view.alert.AlertMenuActivity"/>
+        <activity android:name=".view.alert.SedentaryActivity"/>
+        <activity android:name=".view.alert.ClockActivity"/>
+        <activity android:name=".view.alert.PhoneActivity"/>
+        <activity android:name=".view.alert.SmsActivity"/>
+        <activity android:name=".view.alert.LostActivity"/>
+        <activity android:name=".view.alert.AppActivity"/>
+
+        <activity android:name=".view.TrainActivity"/>
+        <activity android:name=".view.HrTestActivity"/>
+        <activity android:name=".view.UserActivity"/>
+        <activity android:name=".view.DeviceActivity"/>
+        <activity android:name=".view.OtaActivity"
+                  android:launchMode="singleTask"/>
+        <activity android:name=".view.history.HrHistoryActivity"/>
+        <activity android:name=".view.history.StepHistoryActivity"/>
+        <activity android:name=".view.history.SleepHistoryActivity"/>
+        <activity android:name=".view.TestActivity"/>
+
+    </application>
+
+</manifest>

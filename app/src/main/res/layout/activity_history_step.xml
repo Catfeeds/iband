@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#f5f5f5">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:background="#2196f3"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#2196f3">
+    <TextView
+        android:id="@+id/tb_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textColor="@color/color_white"
+        android:textSize="18sp"
+        android:text="计步记录"/>
+
+    <ImageView
+        android:id="@+id/tb_back"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="16dp"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/ic_back"/>
+    </RelativeLayout>
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1px"-->
+        <!--android:background="#0cffffff"/>-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="288dp">
+        <com.manridy.iband.ui.CircularView
+            android:id="@+id/cv_history_step"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            app:cv_background_color="#26ff9800"
+            app:cv_progressbar_color="#deff9800"
+            app:cv_text_color="#de000000"
+            app:cv_hint_color="#8a000000"
+            app:cv_title="每日平均步数"
+            app:cv_text="--"
+            app:cv_state="--公里/--大卡"
+            app:cv_progress="0.5"
+            app:cv_icon="@mipmap/walk_walkic02"/>
+
+        <TextView
+            android:id="@+id/tv_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="250dp"
+            android:textColor="#de000000"
+            android:textSize="14sp"
+            android:text="本月"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+                  android:orientation="horizontal"
+                  android:layout_width="match_parent"
+                  android:layout_height="72dp"
+                  android:layout_marginTop="8dp"
+                  android:layout_marginBottom="8dp">
+
+        <com.manridy.iband.ui.items.DataItems
+            android:id="@+id/di_data1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:line_color="#261976d2"
+            app:data_type="left"
+            app:data_hint="总步数"
+            app:data_unit="步"
+            app:data="--"/>
+
+        <com.manridy.iband.ui.items.DataItems
+            android:id="@+id/di_data2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:line_color="#261976d2"
+            app:data_type="center"
+            app:data_hint="总里程"
+            app:data_unit="公里"
+            app:data="--"/>
+
+        <com.manridy.iband.ui.items.DataItems
+            android:id="@+id/di_data3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:line_color="#261976d2"
+            app:data_type="right"
+            app:data_hint="总热量"
+            app:data_unit="千卡"
+            app:data="--"/>
+
+    </LinearLayout>
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/bc_history_step"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#16000000"/>
+</LinearLayout>
