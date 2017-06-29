@@ -3,7 +3,8 @@ package com.manridy.iband.bean;
 import org.litepal.crud.DataSupport;
 
 /**
- * 血氧
+ * 血氧模板
+ * 应用于血氧数据显示
  * Created by jarLiao on 2016/10/25.
  */
 

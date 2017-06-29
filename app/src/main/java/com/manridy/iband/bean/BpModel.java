@@ -3,7 +3,8 @@ package com.manridy.iband.bean;
 import org.litepal.crud.DataSupport;
 
 /**
- * 血压
+ * 血压模板
+ * 应用于血压数据显示
  * Created by jarLiao on 2016/10/25.
  */
 

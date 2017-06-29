@@ -3,7 +3,8 @@ package com.manridy.iband.bean;
 import org.litepal.crud.DataSupport;
 
 /**
- * 心率
+ * 心率模板
+ * 应用于心率数据显示
  * Created by jarLiao on 2016/10/25.
  */
 

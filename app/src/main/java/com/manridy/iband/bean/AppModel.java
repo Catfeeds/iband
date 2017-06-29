@@ -3,7 +3,8 @@ package com.manridy.iband.bean;
 import org.litepal.crud.DataSupport;
 
 /**
- * 应用
+ * 应用模板
+ * 应用于应用提醒
  * Created by jarLiao on 2016/10/25.
  */
 

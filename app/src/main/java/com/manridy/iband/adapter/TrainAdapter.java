@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 
 /**
  * 训练适配器
+ * Created by jarLiao on 17/5/4.
  */
 
 public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MyViewHolder> {

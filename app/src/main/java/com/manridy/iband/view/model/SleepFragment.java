@@ -2,6 +2,7 @@ package com.manridy.iband.view.model;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -127,30 +128,38 @@ public class SleepFragment extends BaseEventFragment {
     public void onBackgroundEvent(EventMessage event) {
         if (event.getWhat() == EventGlobal.DATA_LOAD_SLEEP) {
             curSleeps = IbandDB.getInstance().getCurSleeps();
-            List<SleepModel> sleepList = new ArrayList<>();
-            if (curSleeps.size()>0) {
-                SleepModel curSleep = curSleeps.get(0);
-                for (int i = 1; i < curSleeps.size(); i++) {
-                    SleepModel nextSleep = curSleeps.get(i);
-                    if (curSleep.getSleepDataType() == nextSleep.getSleepDataType()) {
-                        if (curSleep.getSleepDataType() == 1) {
-                            nextSleep.setSleepDeep(curSleep.getSleepDeep()+nextSleep.getSleepDeep());
-                        }else if (curSleep.getSleepDataType() == 2){
-                            nextSleep.setSleepLight(curSleep.getSleepLight()+nextSleep.getSleepLight());
-                        }
-                        nextSleep.setSleepStartTime(curSleep.getSleepStartTime());
-                    }else {
-                        sleepList.add(curSleep);
-                    }
-                    curSleep = nextSleep;
-                }
-                sleepList.add(curSleep);
-            }
-            curSleeps = sleepList;
+            curSleeps = getFilterRepeatList(curSleeps);
             EventBus.getDefault().post(new EventMessage(EventGlobal.REFRESH_VIEW_SLEEP));
         } else if (event.getWhat() == EventGlobal.REFRESH_VIEW_ALL) {
             EventBus.getDefault().post(new EventMessage(EventGlobal.DATA_LOAD_SLEEP));
         }
+    }
+
+    @NonNull
+    private List<SleepModel> getFilterRepeatList( List<SleepModel> curSleeps) {
+        List<SleepModel> sleepList = new ArrayList<>();
+        if (curSleeps.size()>0) {
+            SleepModel curSleep = curSleeps.get(0);//获取第一条数据
+            for (int i = 1; i < curSleeps.size(); i++) {//循环比较是否类型相同
+                SleepModel nextSleep = curSleeps.get(i);//获取下一条数据
+                if (curSleep.getSleepDataType() == nextSleep.getSleepDataType()) {//比较类型相同
+                    //类型相同时长累加
+                    if (curSleep.getSleepDataType() == 1) {//相同浅睡
+                        nextSleep.setSleepDeep(curSleep.getSleepDeep()+nextSleep.getSleepDeep());
+                    }else if (curSleep.getSleepDataType() == 2){//相同深睡
+                        nextSleep.setSleepLight(curSleep.getSleepLight()+nextSleep.getSleepLight());
+                    }else if (curSleep.getSleepDataType() == 3){//相同清醒
+                        nextSleep.setSleepAwake(curSleep.getSleepAwake()+nextSleep.getSleepAwake());
+                    }
+                    nextSleep.setSleepStartTime(curSleep.getSleepStartTime());//开始时间赋给下一条
+                }else {//类型不同添加到集合
+                    sleepList.add(curSleep);
+                }
+                curSleep = nextSleep;//下一条赋给当前，继续比较
+            }
+            sleepList.add(curSleep);//最后一条添加到集合
+        }
+        return sleepList;
     }
 
     private void setCircularView() {
@@ -178,9 +187,19 @@ public class SleepFragment extends BaseEventFragment {
         SleepModel sleepModel = curSleeps.get(position);
         String start = sleepModel.getSleepStartTime();
         String end = sleepModel.getSleepEndTime();
-        int type = sleepModel.getSleepDeep() > 0 ? 0 : 1;
-        int min = type == 0 ? sleepModel.getSleepDeep() : sleepModel.getSleepLight();
-        String title = type == 0 ? "深睡" : "浅睡";
+        int type = sleepModel.getSleepDataType() ;
+        int min = 0;
+        String title = "";
+        if (type == 1) {
+            min = sleepModel.getSleepDeep();
+            title = "深睡";
+        }else if (type == 2){
+            min = sleepModel.getSleepLight();
+            title = "深睡";
+        }else if (type == 3){
+            min = sleepModel.getSleepAwake();
+            title = "清醒";
+        }
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-DD HH:mm");
         try {
             Date dateStart = simpleDateFormat.parse(start);
@@ -202,6 +221,8 @@ public class SleepFragment extends BaseEventFragment {
         String start = curSleeps.get(0).getSleepStartTime();
         String end = curSleeps.get(curSleeps.size() - 1).getSleepEndTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-DD HH:mm");
+        int awake = getAwake(curSleeps);
+        String str = String.format("%.1f", ((double) awake / 60));
         try {
             Date dateStart = simpleDateFormat.parse(start);
             Date dateEnd = simpleDateFormat.parse(end);
@@ -210,7 +231,7 @@ public class SleepFragment extends BaseEventFragment {
             String endTime = simpleDateFormat2.format(dateEnd);
             diData1.setItemData("昨晚入睡", startTime);
             diData2.setItemData("今天醒来", endTime);
-            diData3.setItemData("清醒时长", "--", "小时");
+            diData3.setItemData("清醒时长",str,"小时");
             tvTimeStart.setText(startTime);
             tvTimeEnd.setText(endTime);
         } catch (ParseException e) {
@@ -218,6 +239,15 @@ public class SleepFragment extends BaseEventFragment {
         }
     }
 
+    private int getAwake(List<SleepModel> curSleeps) {
+        int awake = 0;
+        for (SleepModel curSleep : curSleeps) {
+            if (curSleep.getSleepDataType() == 3) {
+                awake += curSleep.getSleepAwake();
+            }
+        }
+        return awake;
+    }
 
 
 }

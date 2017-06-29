@@ -136,6 +136,7 @@ public class NotificationService2 extends NotificationListenerService {
             List<AppModel> appList = IbandDB.getInstance().getAppList();
             Map<Integer,AppModel> map = new HashMap<>();
             cmdList = getCmdList(content);
+            appAlert = -1;
             for (AppModel appModel : appList) {
                 map.put(appModel.getAppId(),appModel);
             }
@@ -181,7 +182,6 @@ public class NotificationService2 extends NotificationListenerService {
             if (cmdList.size()>0 && appAlert!= -1) {
                 IbandApplication.getIntance().service.watch.sendCmd(BleCmd.setAppAlertContext(infoId,appAlert,cmdList.get(0)), AppleCallback);
             }else {
-                appAlert = -1;
                 Log.d(TAG, "app提醒发送完成");
             }
         }

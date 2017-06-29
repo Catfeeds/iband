@@ -5,9 +5,11 @@ import org.litepal.crud.DataSupport;
 import java.util.Date;
 
 /**
- * 计步数据
+ * 计步模板
+ * 应用于计步数据显示
+ * Created by jarLiao on 2016/10/25.
  */
-public class StepModel extends DataSupport {
+ public class StepModel extends DataSupport {
     private int id;//主键
     private Date stepDate;//时间
     private String stepDay;//天

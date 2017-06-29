@@ -1,12 +1,15 @@
 package com.manridy.iband.adapter;
 
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
 
+/**
+ * 引导页适配器
+ * Created by jarLiao on 17/5/4.
+ */
 public class ViewPagerAdapter extends android.support.v4.view.PagerAdapter {
     private List<View> views;
 

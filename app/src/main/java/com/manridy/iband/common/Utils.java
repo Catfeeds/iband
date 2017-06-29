@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 
 /**
+ * App工具类
  * Created by jarLiao on 17/5/17.
  */
 
@@ -98,11 +99,6 @@ public class Utils {
             }
         }
     }
-
-
-
-
-
 
     public static boolean checkDeviceHasNavigationBar(Context context) {
         boolean hasNavigationBar = false;

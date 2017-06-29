@@ -1,10 +1,9 @@
 package com.manridy.iband.common;
 
 /**
- *
+ * App全局变量
  * Created by jarLiao on 17/5/18.
  */
-
 public class AppGlobal {
     public static final String DATA_APP_FIRST = "data_app_first";
     public static final String DATA_USER_HEAD = "data_user_head";
@@ -31,8 +30,9 @@ public class AppGlobal {
     public static final String DATA_BATTERY_NUM = "data_battery_num";
     public static final String DATA_BATTERY_STATE = "data_battery_state";
     public static final String DATA_SYNC_TIME = "data_sync_time";
-
-    public static final int DEVICE_UNCONNECT = 0;
-    public static final int DEVICE_CONNECTED = 1;
-    public static final int DEVICE_CONNECTING = 2;
+    //device state
+    public static final int DEVICE_STATE_UNCONNECT = 0;
+    public static final int DEVICE_STATE_CONNECTED = 1;
+    public static final int DEVICE_STATE_CONNECTING = 2;
+    public static final int DEVICE_STATE_UNFIND = 3;
 }

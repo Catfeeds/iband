@@ -2,9 +2,9 @@ package com.manridy.iband.bean;
 
 /**
  * 每日数据模板
- * Created by jarLiao
+ * 应用于历史数据查询填充返回
+ * Created by jarLiao on 2016/10/25.
  */
-
 public class DayBean {
     String day;//日期
     int daySum;//一天总和

@@ -121,7 +121,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        int connectState = (int) SPUtil.get(mContext,AppGlobal.DATA_DEVICE_CONNECT_STATE,AppGlobal.DEVICE_UNCONNECT);
+        int connectState = (int) SPUtil.get(mContext,AppGlobal.DATA_DEVICE_CONNECT_STATE,AppGlobal.DEVICE_STATE_UNCONNECT);
         if (connectState == 1) {
             long time = (long) SPUtil.get(mContext, AppGlobal.DATA_SYNC_TIME, 0L);
             if (time != 0 && tbSync != null) {
@@ -146,6 +146,10 @@ public class MainActivity extends BaseActivity {
         initViewPager();
         initNotification();
         mSimpleView = new SimpleView(mContext.getApplicationContext());
+        initNotificationService();
+    }
+
+    private void initNotificationService() {
         boolean appOnOff = (boolean) SPUtil.get(this, AppGlobal.DATA_ALERT_APP,false);
         if (appOnOff) {
             startService(new Intent(this,NotificationService2.class));
@@ -189,11 +193,13 @@ public class MainActivity extends BaseActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_MOVE:
-                        prlRefresh.setEnabled(false);
+//                        prlRefresh.setEnabled(false);
+//                        Log.d(TAG, "onTouch() called with: ACTION_MOVE ");
                         break;
                     case MotionEvent.ACTION_UP:
                     case MotionEvent.ACTION_CANCEL:
-                        prlRefresh.setEnabled(true);
+//                        prlRefresh.setEnabled(true);
+//                        Log.d(TAG, "onTouch() called with: ACTION_CANCEL ");
                         break;
                 }
                 return false;
@@ -289,7 +295,7 @@ public class MainActivity extends BaseActivity {
             public void onRefresh() {
                 final String mac = (String) SPUtil.get(mContext, AppGlobal.DATA_DEVICE_BIND_MAC, "");
                 if (checkBindDevice(mac)) return;
-                int state = (int) SPUtil.get(mContext, AppGlobal.DATA_DEVICE_CONNECT_STATE, AppGlobal.DEVICE_UNCONNECT);
+                int state = (int) SPUtil.get(mContext, AppGlobal.DATA_DEVICE_CONNECT_STATE, AppGlobal.DEVICE_STATE_UNCONNECT);
                 if (state != 1) {
                     runOnUiThread(new Runnable() {
                         @Override
@@ -349,13 +355,14 @@ public class MainActivity extends BaseActivity {
     protected void loadData() {
         super.loadData();
         String mac = (String) SPUtil.get(mContext, AppGlobal.DATA_DEVICE_BIND_MAC, "");
-        int state = (int) SPUtil.get(mContext, AppGlobal.DATA_DEVICE_CONNECT_STATE, AppGlobal.DEVICE_UNCONNECT);
+        int state = (int) SPUtil.get(mContext, AppGlobal.DATA_DEVICE_CONNECT_STATE, AppGlobal.DEVICE_STATE_UNCONNECT);
         if (!iwaerApplication.service.watch.isBluetoothEnable()) {
             OpenBluetoothDialog();
         } else if (mac.isEmpty()) {
             showFloatView("未绑定设备", "绑定");
         } else if (state == 0) {
-            showFloatView("设备未连接", "连接");
+            tbSync.setText("设备连接中");
+            iwaerApplication.service.initConnect(false);
         } else if (state == 1) {
             tbSync.setText("设备已连接");
             EventBus.getDefault().post(new EventMessage(EventGlobal.DATA_SYNC_HISTORY));

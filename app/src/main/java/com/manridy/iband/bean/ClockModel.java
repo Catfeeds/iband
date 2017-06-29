@@ -4,7 +4,9 @@ import org.litepal.crud.DataSupport;
 
 
 /**
- *
+ * 闹钟模板
+ * 应用于闹钟提醒显示
+ * Created by jarLiao on 2016/10/25.
  */
 public class ClockModel extends DataSupport{
     private int id;

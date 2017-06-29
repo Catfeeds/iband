@@ -40,9 +40,9 @@ import java.lang.reflect.Method;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import static com.manridy.iband.common.AppGlobal.DEVICE_CONNECTED;
-import static com.manridy.iband.common.AppGlobal.DEVICE_CONNECTING;
-import static com.manridy.iband.common.AppGlobal.DEVICE_UNCONNECT;
+import static com.manridy.iband.common.AppGlobal.DEVICE_STATE_CONNECTED;
+import static com.manridy.iband.common.AppGlobal.DEVICE_STATE_CONNECTING;
+import static com.manridy.iband.common.AppGlobal.DEVICE_STATE_UNCONNECT;
 import static com.manridy.iband.common.EventGlobal.ACTION_BATTERY_NOTIFICATION;
 import static com.manridy.iband.common.EventGlobal.ACTION_CALL_END;
 import static com.manridy.iband.common.EventGlobal.ACTION_CAMERA_CAPTURE;
@@ -63,23 +63,31 @@ import static com.manridy.sdk.BluetoothLeManager.ACTION_SERVICES_DISCOVERED;
  * 蓝牙后台服务
  * Created by jarLiao .
  */
-
 public class BleService extends Service {
     private String TAG = "BleService";
     public Watch watch;
 
     public void init(){
-        watch = Watch.getInstance(this);
-        watch.setActionListener(actionListener);
-        watch.setStepNotifyListener(notifyListener);
-        watch.setRunNotifyListener(notifyListener);
-        initBroadcast();
-        initConnect(true);
+        watch = Watch.getInstance(this);//初始化手表sdk
+        initListener();//初始化监听器
+        initBroadcast();//初始化ble广播
+        initConnect(true);//初始化连接
     }
 
+    private void initListener() {
+        watch.setActionListener(actionListener);//设置动作监听
+        watch.setStepNotifyListener(notifyListener);//设置分段计步上报监听
+        watch.setRunNotifyListener(notifyListener);//设置跑步上报监听
+    }
+
+    /**
+     * 初始化连接
+     * @param isScan 是否需要扫描
+     * @param bleConnectCallback 结果回调
+     */
     public void initConnect(boolean isScan,final BleConnectCallback bleConnectCallback) {
         if (!watch.isBluetoothEnable()) {
-            SPUtil.put(BleService.this,AppGlobal.DATA_DEVICE_CONNECT_STATE,DEVICE_UNCONNECT);
+            SPUtil.put(BleService.this,AppGlobal.DATA_DEVICE_CONNECT_STATE, DEVICE_STATE_UNCONNECT);
         }
         final String mac = (String) SPUtil.get(this, AppGlobal.DATA_DEVICE_BIND_MAC,"");
         if (mac==null || mac.isEmpty()) {
@@ -93,6 +101,11 @@ public class BleService extends Service {
         }
     }
 
+    /**
+     *
+     * @param mac
+     * @param bleConnectCallback
+     */
     private void scanAndConnect(final String mac, final BleConnectCallback bleConnectCallback){
         watch.startScan(new TimeMacScanCallback(mac,3000) {
             @Override
@@ -181,7 +194,7 @@ public class BleService extends Service {
                     LogUtil.e(TAG,"蓝牙状态----蓝牙重连中");
                     String mac = (String) SPUtil.get(BleService.this,AppGlobal.DATA_DEVICE_BIND_MAC,"");
                     if (mac!=null && !mac.isEmpty()) {
-                        SPUtil.put(BleService.this, AppGlobal.DATA_DEVICE_CONNECT_STATE, DEVICE_CONNECTING);
+                        SPUtil.put(BleService.this, AppGlobal.DATA_DEVICE_CONNECT_STATE, DEVICE_STATE_CONNECTING);
                         showNotification(2);
                     }
                     EventBus.getDefault().post(new EventMessage(EventGlobal.STATE_DEVICE_CONNECTING));
@@ -192,7 +205,7 @@ public class BleService extends Service {
                     if (mac2!=null && !mac2.isEmpty()) {
                         showNotification(0);
                     }
-                    SPUtil.put(BleService.this,AppGlobal.DATA_DEVICE_CONNECT_STATE,DEVICE_UNCONNECT);
+                    SPUtil.put(BleService.this,AppGlobal.DATA_DEVICE_CONNECT_STATE, DEVICE_STATE_UNCONNECT);
                     EventBus.getDefault().post(new EventMessage(EventGlobal.STATE_DEVICE_DISCONNECT));
                     break;
                 case ACTION_SERVICES_DISCOVERED:
@@ -201,7 +214,7 @@ public class BleService extends Service {
                 case ACTION_NOTIFICATION_ENABLE:
                     LogUtil.e(TAG,"蓝牙状态----打开通知");
                     showNotification(1);
-                    SPUtil.put(BleService.this,AppGlobal.DATA_DEVICE_CONNECT_STATE,DEVICE_CONNECTED);
+                    SPUtil.put(BleService.this,AppGlobal.DATA_DEVICE_CONNECT_STATE, DEVICE_STATE_CONNECTED);
                     EventBus.getDefault().post(new EventMessage(EventGlobal.STATE_DEVICE_CONNECT));
                     break;
                 case ACTION_DATA_AVAILABLE:
@@ -242,11 +255,16 @@ public class BleService extends Service {
                     EventBus.getDefault().post(new EventMessage(ACTION_HR_TESTING));
                     break;
                 case ACTION_CALL_END:
-//                    rejectCall(BleService.this);
                     end(BleService.this);
-//                    endCall(BleService.this);
                     break;
             }
+        }
+    };
+
+    BleNotifyListener notifyListener = new BleNotifyListener() {
+        @Override
+        public void onNotify(Object o) {
+            EventBus.getDefault().post(new EventMessage(EventGlobal.DATA_SYNC_HISTORY));
         }
     };
 
@@ -257,7 +275,7 @@ public class BleService extends Service {
             TelephonyManager tm = (TelephonyManager)context.getSystemService(Service.TELEPHONY_SERVICE);//监听电话服务
             getITelephonyMethod.setAccessible(true);
             ITelephony  mITelephony = (ITelephony) getITelephonyMethod.invoke(tm,
-                        (Object[]) null);
+                    (Object[]) null);
             // 拒接来电
             mITelephony.endCall();
         } catch (NoSuchMethodException e) {
@@ -269,95 +287,14 @@ public class BleService extends Service {
         }catch (RemoteException e) {
             e.printStackTrace();
         }
-
     }
-
-    public boolean endCall(Context context) {
-        boolean callSuccess = false;
-        try {
-        Method getITelephonyMethod =TelephonyManager.class
-                .getDeclaredMethod("getITelephony", (Class[]) null);
-            TelephonyManager tm = (TelephonyManager)context.getSystemService(Service.TELEPHONY_SERVICE);//监听电话服务
-            getITelephonyMethod.setAccessible(true);
-        ITelephony telephonyService = (ITelephony) getITelephonyMethod.invoke(tm,
-                (Object[]) null);
-            if (telephonyService != null) {
-                callSuccess = telephonyService.endCall();
-            }
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        if (callSuccess == false) {
-            Executor eS = Executors.newSingleThreadExecutor();
-            eS.execute(new Runnable() {
-                @Override
-                public void run() {
-                    disconnectCall();
-                }
-            });
-            callSuccess = true;
-        }
-        return callSuccess;
-    }
-
-    private boolean disconnectCall() {
-        Runtime runtime = Runtime.getRuntime();
-        try {
-            runtime.exec("service call phone 5 \n");
-        } catch (Exception exc) {
-            exc.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
-    // 使用endCall挂断不了，再使用killCall反射调用再挂一次
-    public static boolean killCall(Context context) {
-        try {
-            // Get the boring old TelephonyManager
-        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-
-            // Get the getITelephony() method
-       Class classTelephony = Class.forName(telephonyManager.getClass().getName());
-            Method methodGetITelephony = classTelephony.getDeclaredMethod("getITelephony");
-
-            // Ignore that the method is supposed to be private
-        methodGetITelephony.setAccessible(true);
-
-            // Invoke getITelephony() to get the ITelephony interface
-        Object telephonyInterface = methodGetITelephony.invoke(telephonyManager);
-
-            // Get the endCall method from ITelephony
-        Class telephonyInterfaceClass = Class.forName(telephonyInterface.getClass().getName());
-            Method methodEndCall = telephonyInterfaceClass.getDeclaredMethod("endCall");
-
-            // Invoke endCall()
-            methodEndCall.invoke(telephonyInterface);
-        } catch (Exception ex) { // Many things can go wrong with reflection calls
-            return false;
-        }
-        return true;
-    }
-
-
-    BleNotifyListener notifyListener = new BleNotifyListener() {
-        @Override
-        public void onNotify(Object o) {
-            EventBus.getDefault().post(new EventMessage(EventGlobal.DATA_SYNC_HISTORY));
-        }
-    };
-
-
 
     public class LocalBinder extends Binder {
         public BleService service(){
             return BleService.this;
         }
     }
+
     @Override
     public IBinder onBind(Intent intent) {
         IBinder result = null;

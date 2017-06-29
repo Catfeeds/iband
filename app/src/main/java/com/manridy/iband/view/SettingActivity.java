@@ -115,7 +115,7 @@ public class SettingActivity extends BaseActionActivity {
         setTitleBar("设置");
         initUser();
         bindName = (String) SPUtil.get(mContext, AppGlobal.DATA_DEVICE_BIND_NAME, "");
-        connectState = (int) SPUtil.get(mContext,AppGlobal.DATA_DEVICE_CONNECT_STATE,AppGlobal.DEVICE_UNCONNECT);
+        connectState = (int) SPUtil.get(mContext,AppGlobal.DATA_DEVICE_CONNECT_STATE,AppGlobal.DEVICE_STATE_UNCONNECT);
         curBatteryNum = (int) SPUtil.get(mContext,AppGlobal.DATA_BATTERY_NUM,-1);
         curBatteryState = (int) SPUtil.get(mContext,AppGlobal.DATA_BATTERY_STATE,-1);
         if (!bindName.isEmpty()){

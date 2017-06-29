@@ -13,11 +13,12 @@ public class Sleep {
     private int sleepDataType;//数据类型
     private int sleepDeep;//深睡
     private int sleepLight;//浅睡
+    private int sleepAwake;//浅睡
 
     public Sleep() {
     }
 
-    public Sleep(String sleepDay, int sleepLength, int sleepNum, String sleepStartTime, String sleepEndTime, int sleepDataType, int sleepDeep, int sleepLight) {
+    public Sleep(String sleepDay, int sleepLength, int sleepNum, String sleepStartTime, String sleepEndTime, int sleepDataType, int sleepDeep, int sleepLight,int sleepAwake) {
         this.sleepDay = sleepDay;
         this.sleepLength = sleepLength;
         this.sleepNum = sleepNum;
@@ -26,6 +27,7 @@ public class Sleep {
         this.sleepDataType = sleepDataType;
         this.sleepDeep = sleepDeep;
         this.sleepLight = sleepLight;
+        this.sleepAwake = sleepAwake;
     }
 
     public int getId() {
@@ -98,6 +100,14 @@ public class Sleep {
 
     public void setSleepLight(int sleepLight) {
         this.sleepLight = sleepLight;
+    }
+
+    public int getSleepAwake() {
+        return sleepAwake;
+    }
+
+    public void setSleepAwake(int sleepAwake) {
+        this.sleepAwake = sleepAwake;
     }
 
     @Override

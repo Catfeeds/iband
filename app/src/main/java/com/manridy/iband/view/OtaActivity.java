@@ -3,7 +3,6 @@ package com.manridy.iband.view;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -118,7 +117,7 @@ public class OtaActivity extends BaseActionActivity {
                 if (tvOtaResult.getText().toString().equals("升级失败")) {
                     finish();
                 }else {
-                    int state = (int) SPUtil.get(mContext, AppGlobal.DATA_DEVICE_CONNECT_STATE, AppGlobal.DEVICE_UNCONNECT);
+                    int state = (int) SPUtil.get(mContext, AppGlobal.DATA_DEVICE_CONNECT_STATE, AppGlobal.DEVICE_STATE_UNCONNECT);
                     if (state == 1) {
                         showProgress("正在同步设置...");
                         SyncAlert.getInstance(mContext).sync();

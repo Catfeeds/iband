@@ -2,6 +2,11 @@ package com.manridy.iband.bean;
 
 import org.litepal.crud.DataSupport;
 
+/**
+ * 界面模板
+ * 应用于界面选择
+ * Created by jarLiao on 2016/10/25.
+ */
 public class ViewModel extends DataSupport {
     private int id;
     private int viewId;

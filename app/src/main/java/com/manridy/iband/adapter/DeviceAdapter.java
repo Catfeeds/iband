@@ -18,7 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 菜单适配器
+ * 扫描设备适配器
  * Created by jarLiao on 17/5/4.
  */
 

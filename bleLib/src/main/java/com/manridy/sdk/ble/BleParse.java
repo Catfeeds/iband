@@ -484,29 +484,34 @@ public class BleParse {
         int sleepNum = body[2];//睡眠包编号
         byte[] startTimeBs = new byte[5];//开始时间
         byte[] endTimeBs = new byte[5];//结束时间
-        byte[] deepTimeBs = new byte[2];//深睡时间
-        byte[] lightTimeBs = new byte[2];//浅睡时间
+        byte[] sleepTimeBs = new byte[2];//深睡时间
+//        byte[] lightTimeBs = new byte[2];//浅睡时间
         //拷贝字节
         System.arraycopy(body,3,startTimeBs,0,startTimeBs.length);
         System.arraycopy(body,8,endTimeBs,0,endTimeBs.length);
-        System.arraycopy(body,13,deepTimeBs,0,deepTimeBs.length);
-        System.arraycopy(body,15,lightTimeBs,0,lightTimeBs.length);
+        System.arraycopy(body,13,sleepTimeBs,0,sleepTimeBs.length);
+//        System.arraycopy(body,15,lightTimeBs,0,lightTimeBs.length);
         //解析数据
         String startTime = BitUtil.bytesToDate(startTimeBs,1);//解析开始时间
         String endTime = BitUtil.bytesToDate(endTimeBs,1);//解析结束时间
-        int deep = BitUtil.byte3ToInt(deepTimeBs);//解析深度睡眠
-        int light = BitUtil.byte3ToInt(lightTimeBs);//解析浅度睡眠
+        int time = BitUtil.byte3ToInt(sleepTimeBs);//解析深度睡眠
+//        int light = BitUtil.byte3ToInt(lightTimeBs);//解析浅度睡眠
         String day =BitUtil.bytesToDate(endTimeBs,4);
-        int type = body[0] ;//睡眠数据类型 1深睡 2浅睡 3清醒
-        int dataType = body[17];
+        int type = body[0] ;
+        int dataType = body[15];//睡眠数据类型 1深睡 2浅睡 3清醒
         if ((body[11]&0xff) >20) {//如果日期时间大于20点判断为今天
             day = TimeUtil.getCalculateDay(day,+1);
         }
-        if (body[17] == 0x01) {//为清醒时间
-
+        int deep = 0,light = 0,awake = 0;
+        if (dataType == 1) {
+            deep = time;
+        }else if (dataType == 2){
+            light = time;
+        }else if (dataType == 3){
+            awake = time;
         }
         //数据填充模板
-        Sleep sleep = new Sleep(day,sleepLength,sleepNum, startTime,endTime,dataType,deep,light);
+        Sleep sleep = new Sleep(day,sleepLength,sleepNum, startTime,endTime,dataType,deep,light,awake);
         String result = gson.toJson(sleep);
         if (type == 3){
             if (bleCallback == null) {

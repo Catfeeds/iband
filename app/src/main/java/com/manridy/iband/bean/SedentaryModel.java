@@ -3,7 +3,9 @@ package com.manridy.iband.bean;
 import org.litepal.crud.DataSupport;
 
 /**
- *
+ * 久坐模板
+ * 应用于久坐有提醒
+ * Created by jarLiao on 2016/10/25.
  */
 
 public class SedentaryModel extends DataSupport {

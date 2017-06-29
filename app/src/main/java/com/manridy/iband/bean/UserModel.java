@@ -4,6 +4,7 @@ import org.litepal.crud.DataSupport;
 
 /**
  * 用户模板
+ * 应用于用户数据显示
  */
 public class UserModel extends DataSupport {
     private int id;//数据索引

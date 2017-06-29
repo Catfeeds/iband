@@ -160,8 +160,8 @@ public class ChartView extends View {
 
     private int getTypeColor(Item item, int[] colors){
         int color = Color.BLUE;
-        if (colors.length >= item._type) {
-            color = colors[item._type];
+        if (colors.length >= item._type-1) {
+            color = colors[item._type-1];
         }
         return color;
     }
@@ -176,16 +176,22 @@ public class ChartView extends View {
     }
 
     public class Item{
-        public static final int DEEP = 0;
-        public static final int LIGHT = 1;
-        public static final int SOBER = 2;
+        public static final int DEEP = 1;
+        public static final int LIGHT = 2;
+        public static final int SOBER = 3;
 
         public int _type;
         public int _value;
 
         public Item(SleepModel sleepModel){
-            this._type = sleepModel.getSleepDeep()!= 0 ? DEEP : LIGHT;
-            this._value = _type == 0 ? sleepModel.getSleepDeep() : sleepModel.getSleepLight();
+            this._type = sleepModel.getSleepDataType();
+            if (_type == DEEP) {
+                this._value = sleepModel.getSleepDeep();
+            }else if (_type == LIGHT){
+                this._value = sleepModel.getSleepLight();
+            }else if (_type == SOBER){
+                this._value = sleepModel.getSleepAwake();
+            }
         }
     }
 

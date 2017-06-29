@@ -4,6 +4,8 @@ import org.litepal.crud.DataSupport;
 
 /**
  * 睡眠模板
+ * 应用于睡眠数据显示
+ * Created by jarLiao on 2016/10/25.
  */
 public class SleepModel extends DataSupport {
 
@@ -16,6 +18,7 @@ public class SleepModel extends DataSupport {
     private int sleepDataType;//数据类型
     private int sleepDeep;//深睡
     private int sleepLight;//浅睡
+    private int sleepAwake;//浅睡
 
 
 
@@ -108,6 +111,14 @@ public class SleepModel extends DataSupport {
 
     public void setSleepLight(int sleepLight) {
         this.sleepLight = sleepLight;
+    }
+
+    public int getSleepAwake() {
+        return sleepAwake;
+    }
+
+    public void setSleepAwake(int sleepAwake) {
+        this.sleepAwake = sleepAwake;
     }
 
     @Override

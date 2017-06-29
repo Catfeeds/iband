@@ -16,6 +16,10 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+/**
+ * Xml DOM解析
+ * Created by jarLiao on 17/5/4.
+ */
 public class DomXmlParse {
     public static class Image{
         public String id;
