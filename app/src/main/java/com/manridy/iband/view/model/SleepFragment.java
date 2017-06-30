@@ -195,7 +195,7 @@ public class SleepFragment extends BaseEventFragment {
             title = "深睡";
         }else if (type == 2){
             min = sleepModel.getSleepLight();
-            title = "深睡";
+            title = "浅睡";
         }else if (type == 3){
             min = sleepModel.getSleepAwake();
             title = "清醒";

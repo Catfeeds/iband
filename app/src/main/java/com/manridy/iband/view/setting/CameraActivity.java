@@ -1,16 +1,22 @@
 package com.manridy.iband.view.setting;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.ImageFormat;
+import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.manridy.iband.common.EventGlobal;
@@ -24,11 +30,14 @@ import com.manridy.sdk.exception.BleException;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -160,7 +169,52 @@ public class CameraActivity extends BaseActionActivity {
     private void setStartPreview(Camera camera, SurfaceHolder holder) {
         try {
             camera.setPreviewDisplay(holder);
-            camera.setDisplayOrientation(90);
+//            camera.setDisplayOrientation(180);
+            setCameraDisplayOrientation(this, Camera.CameraInfo.CAMERA_FACING_BACK,camera);
+            Camera.Parameters params = mCamera.getParameters();
+            params.setPictureFormat(ImageFormat.JPEG);
+            float height = 0,width = 0;
+//        params.setPictureSize(1024,768);
+//        parameters(mCamera);
+//        params.setPreviewSize(1280, 720);
+//        params.setPictureSize(1280, 720);
+            List<Camera.Size> pictureSizeList = params.getSupportedPictureSizes();
+            for (Camera.Size size : pictureSizeList) {
+                Log.i(TAG, "pictureSizeList size.width=" + size.width + "  size.height=" + size.height);
+            }
+            /**从列表中选取合适的分辨率*/
+            Camera.Size picSize = getProperSize(pictureSizeList, ((float) height / width));
+            if (null == picSize) {
+                Log.i(TAG, "null == picSize");
+                picSize = params.getPictureSize();
+            }
+            Log.i(TAG, "picSize.width=" + picSize.width + "  picSize.height=" + picSize.height);
+            // 根据选出的PictureSize重新设置SurfaceView大小
+            float w = picSize.width;
+            float h = picSize.height;
+            params.setPictureSize(1280,720);
+//            svCamera.setLayoutParams(new FrameLayout.LayoutParams((int) (height*(h/w)), (int) height));
+
+            // 获取摄像头支持的PreviewSize列表
+            List<Camera.Size> previewSizeList = params.getSupportedPreviewSizes();
+
+            for (Camera.Size size : previewSizeList) {
+                Log.i(TAG, "previewSizeList size.width=" + size.width + "  size.height=" + size.height);
+            }
+            Camera.Size preSize = getProperSize(previewSizeList, ((float) height) / width);
+            if (null != preSize) {
+                Log.i(TAG, "preSize.width=" + preSize.width + "  preSize.height=" + preSize.height);
+                params.setPreviewSize(preSize.width, preSize.height);
+            }
+
+            params.setJpegQuality(100); // 设置照片质量
+            if (params.getSupportedFocusModes().contains(android.hardware.Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
+                params.setFocusMode(android.hardware.Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);// 连续对焦模式
+            }
+
+            mCamera.cancelAutoFocus();//自动对焦。
+//        params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+            mCamera.setParameters(params);
             camera.startPreview();
         } catch (IOException e) {
             e.printStackTrace();
@@ -171,21 +225,35 @@ public class CameraActivity extends BaseActionActivity {
      * 拍照
      */
     public void capture() {
-        Camera.Parameters params = mCamera.getParameters();
-        params.setPictureFormat(ImageFormat.JPEG);
-//        params.setPreviewSize(800, 400);
-        params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-        mCamera.setParameters(params);
+
         // 使用自动对焦功能
-        mCamera.autoFocus(new Camera.AutoFocusCallback() {
-            @Override
-            public void onAutoFocus(boolean success, Camera camera) {
-                if (success) {
-                }
-            }
-        });
+
         mCamera.takePicture(null, null, mPictureCallback);
 
+    }
+
+    private Camera.Size getProperSize(List<Camera.Size> pictureSizeList, float screenRatio) {
+        Log.i(TAG, "screenRatio=" + screenRatio);
+        Camera.Size result = null;
+        for (Camera.Size size : pictureSizeList) {
+            float currentRatio = ((float) size.width) / size.height;
+            if (currentRatio - screenRatio == 0) {
+                result = size;
+                break;
+            }
+        }
+
+        if (null == result) {
+            for (Camera.Size size : pictureSizeList) {
+                float curRatio = ((float) size.width) / size.height;
+                if (curRatio == 4f / 3) {// 默认w:h = 4:3
+                    result = size;
+                    break;
+                }
+            }
+        }
+
+        return result;
     }
 
     /**
@@ -202,7 +270,17 @@ public class CameraActivity extends BaseActionActivity {
             }
             try {
                 FileOutputStream fos = new FileOutputStream(pictureFile);
-                fos.write(data);
+                Bitmap oldBitmap = BitmapFactory.decodeByteArray(data, 0,
+                        data.length);
+                Matrix matrix = new Matrix();
+                matrix.setRotate(90);
+                Bitmap newBitmap = Bitmap.createBitmap(oldBitmap, 0, 0,
+                        oldBitmap.getWidth(), oldBitmap.getHeight(),
+                        matrix, true);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                newBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] newData = baos.toByteArray();
+                fos.write(newData);
                 fos.close();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -261,6 +339,41 @@ public class CameraActivity extends BaseActionActivity {
             }
         }
     }
+
+
+
+    public static void setCameraDisplayOrientation(Activity activity,
+                                                   int cameraId, Camera camera) {
+        android.hardware.Camera.CameraInfo info = new android.hardware.Camera.CameraInfo();
+        android.hardware.Camera.getCameraInfo(cameraId, info);
+        int rotation = activity.getWindowManager().getDefaultDisplay()
+                .getRotation();
+        int degrees = 0;
+        switch (rotation) {
+            case Surface.ROTATION_0:
+                degrees = 0;
+                break;
+            case Surface.ROTATION_90:
+                degrees = 90;
+                break;
+            case Surface.ROTATION_180:
+                degrees = 180;
+                break;
+            case Surface.ROTATION_270:
+                degrees = 270;
+                break;
+        }
+
+        int result;
+        if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+            result = (info.orientation + degrees) % 360;
+            result = (360 - result) % 360;
+        } else {
+            result = (info.orientation - degrees + 360) % 360;
+        }
+        camera.setDisplayOrientation(result);
+    }
+
 
     /**
      * 释放相机资源
