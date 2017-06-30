@@ -45,6 +45,7 @@ import static com.manridy.iband.common.AppGlobal.DEVICE_STATE_CONNECTING;
 import static com.manridy.iband.common.AppGlobal.DEVICE_STATE_UNCONNECT;
 import static com.manridy.iband.common.EventGlobal.ACTION_BATTERY_NOTIFICATION;
 import static com.manridy.iband.common.EventGlobal.ACTION_CALL_END;
+import static com.manridy.iband.common.EventGlobal.ACTION_CALL_RUN;
 import static com.manridy.iband.common.EventGlobal.ACTION_CAMERA_CAPTURE;
 import static com.manridy.iband.common.EventGlobal.ACTION_CAMERA_EXIT;
 import static com.manridy.iband.common.EventGlobal.ACTION_FIND_PHONE_START;
@@ -257,6 +258,9 @@ public class BleService extends Service {
                 case ACTION_CALL_END:
                     end(BleService.this);
                     break;
+                case ACTION_CALL_RUN:
+                    answerRingingCall(BleService.this);
+                    break;
             }
         }
     };
@@ -288,6 +292,30 @@ public class BleService extends Service {
             e.printStackTrace();
         }
     }
+
+
+    public void answerRingingCall(Context context){
+        try {
+            Log.d(TAG, "answerRingingCall() called ");
+            Method getITelephonyMethod =TelephonyManager.class
+                    .getDeclaredMethod("getITelephony", (Class[]) null);
+            TelephonyManager tm = (TelephonyManager)context.getSystemService(Service.TELEPHONY_SERVICE);//监听电话服务
+            getITelephonyMethod.setAccessible(true);
+            ITelephony  mITelephony = (ITelephony) getITelephonyMethod.invoke(tm,
+                    (Object[]) null);
+            // 拒接来电
+            mITelephony.answerRingingCall();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public class LocalBinder extends Binder {
         public BleService service(){

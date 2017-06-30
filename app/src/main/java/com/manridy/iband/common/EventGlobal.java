@@ -52,6 +52,7 @@ public class EventGlobal {
     public static final int ACTION_HR_TESTING = 902;
     public static final int ACTION_HR_TESTED = 900;
     public static final int ACTION_CALL_END = 830;
+    public static final int ACTION_CALL_RUN = 831;
     //通知栏动作
     public static final int ACTION_BLUETOOTH_OPEN = 2400;
     public static final int ACTION_DEVICE_CONNECT = 2401;

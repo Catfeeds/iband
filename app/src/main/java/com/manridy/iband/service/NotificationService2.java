@@ -53,6 +53,8 @@ public class NotificationService2 extends NotificationListenerService {
     private int appAlert = -1;
 
     public static final String PAGE_NAME_QQ ="com.tencent.mobileqq";
+    public static final String PAGE_NAME_QQ_I ="com.tencent.mobileqqi";//qq国际版
+    public static final String PAGE_NAME_QQ_LITE ="com.tencent.qqlite";//qq轻聊版
     public static final String PAGE_NAME_WX ="com.tencent.mm";
     public static final String PAGE_NAME_WHATSAPP ="com.whatsapp";
     public static final String PAGE_NAME_FACEBOOK ="com.facebook.katana";
@@ -144,7 +146,7 @@ public class NotificationService2 extends NotificationListenerService {
             boolean wxAlert = map.containsKey(APP_ID_WX) && map.get(APP_ID_WX).isOnOff();
             boolean whatsAlert = map.containsKey(APP_ID_WHATSAPP) && map.get(APP_ID_WHATSAPP).isOnOff();
             boolean facebookAlert = map.containsKey(APP_ID_FACEBOOK) && map.get(APP_ID_FACEBOOK).isOnOff();
-            if (packageName.equals(PAGE_NAME_QQ) && qqAlert) {
+            if (isQQPackage(packageName) && qqAlert) {
                 appAlert = APP_ID_QQ;
             }else if (packageName.equals(PAGE_NAME_WX) && wxAlert){
                 appAlert = APP_ID_WX;
@@ -172,6 +174,11 @@ public class NotificationService2 extends NotificationListenerService {
 //            notificationListener.onNotificationPosted(sbn);
 //        }
     }
+
+    private boolean isQQPackage(String packageName) {
+        return packageName.equals(PAGE_NAME_QQ)||packageName.equals(PAGE_NAME_QQ_I)||packageName.equals(PAGE_NAME_QQ_LITE);
+    }
+
     BleCallback AppleCallback = new BleCallback() {
         @Override
         public void onSuccess(Object o) {

@@ -160,7 +160,7 @@ public class ChartView extends View {
 
     private int getTypeColor(Item item, int[] colors){
         int color = Color.BLUE;
-        if (colors.length >= item._type-1) {
+        if (colors.length >= item._type && item._type>0) {
             color = colors[item._type-1];
         }
         return color;

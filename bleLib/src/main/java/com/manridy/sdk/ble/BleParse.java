@@ -266,6 +266,10 @@ public class BleParse {
                     if (actionListener != null) {
                         actionListener.onAction(830,null);
                     }
+                }else if (data[2] == 3 && data[3] == 1) {
+                    if (actionListener != null) {
+                        actionListener.onAction(831, null);
+                    }
                 }
                 break;
         }
