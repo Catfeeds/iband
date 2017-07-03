@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.ContactsContract;
+import android.service.notification.NotificationListenerService;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.telephony.PhoneStateListener;
@@ -63,7 +64,7 @@ public class AlertService extends Service {
     }
 
     private void initReceiver() {
-        IntentFilter filter = getIntentFilter();//
+        IntentFilter filter = getIntentFilter();
         alertReceiver = new AlertReceiver();
         registerReceiver(alertReceiver,filter);
     }
@@ -127,6 +128,11 @@ public class AlertService extends Service {
             }
         };
 
+    /**
+     *
+     * @param context
+     * @param intent
+     */
     private void smsReceived(Context context, Intent intent) {
         try {
             if (!checkOpenSmsAlert(context)) return;//判断是否开启短信提醒

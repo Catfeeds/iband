@@ -7,13 +7,12 @@
               android:background="@color/activity_background">
     <include layout="@layout/tab_activity"/>
 
-
-
     <com.manridy.iband.ui.items.AlertBigItems
         android:id="@+id/ai_alert"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:big_name="开启防丢提醒"
-        app:big_hint="连接断开时，手表会振动提醒"
+        app:big_name="开启翻腕亮屏"
+        app:big_hint="抬手翻腕时亮屏"
         app:big_onoff="true"/>
+
 </LinearLayout>

@@ -31,8 +31,6 @@
     <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
-    <uses-permission android:name="android.permission.MODIFY_PHONE_STATE" />
-    <uses-permission android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"/>
 
 
     <uses-feature android:name="android.hardware.camera" />
@@ -116,7 +114,7 @@
         <activity android:name=".view.history.StepHistoryActivity"/>
         <activity android:name=".view.history.SleepHistoryActivity"/>
         <activity android:name=".view.TestActivity"/>
-
+        <activity android:name=".view.setting.WristActivity"/>
     </application>
 
 </manifest>

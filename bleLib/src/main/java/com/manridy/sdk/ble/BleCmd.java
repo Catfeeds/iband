@@ -697,4 +697,16 @@ public class BleCmd {
         body[1] = (byte) ss;
         return BleProtocol.cmd(head,type,body);
     }
+
+    /**
+     * 设置翻腕亮屏开关
+     * @param onOff 0关 1开
+     * @return
+     */
+    public static byte[] setWristOnOff(int onOff){
+        type = 0x15;
+        body = new byte[17];
+        body[0] = (byte) onOff;
+        return BleProtocol.cmd(head,type,body);
+    }
 }

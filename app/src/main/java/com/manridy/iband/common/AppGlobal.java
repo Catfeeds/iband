@@ -19,6 +19,7 @@ public class AppGlobal {
     public static final String DATA_ALERT_CLOCK = "data_alert_clock";
     public static final String DATA_ALERT_SEDENTARY = "data_alert_sedentary";
     public static final String DATA_ALERT_APP = "data_alert_app";
+    public static final String DATA_ALERT_WRIST = "data_alert_wrist";
     //setting
     public static final String DATA_SETTING_LIGHT = "data_setting_light";
     public static final String DATA_SETTING_UNIT= "data_setting_unit";

@@ -61,7 +61,7 @@ public class SyncAlert {
         syncIndex = errorNum = 0;
         send();
     }
-//    同步时间>>获取版本号>>获取电量>>用户信息>>计步目标>>界面选择>>久坐提醒>>防丢提醒>>闹钟提醒>>亮度调节>>单位设置>>时间格式
+//    同步时间>>获取版本号>>获取电量>>用户信息>>计步目标>>界面选择>>久坐提醒>>防丢提醒>>闹钟提醒>>亮度调节>>单位设置>>时间格式>>
     BleCallback bleCallback = new BleCallback() {
         @Override
         public void onSuccess(Object o) {
@@ -84,7 +84,7 @@ public class SyncAlert {
     };
 
     private synchronized void next(){
-        if (syncIndex < 11) {
+        if (syncIndex < 12) {
             syncIndex++;
             send();
         }else {
@@ -179,6 +179,10 @@ public class SyncAlert {
             case 11:
                 int unitTime = (int) SPUtil.get(mContext, AppGlobal.DATA_SETTING_UNIT_TIME,0);
                 watch.sendCmd(BleCmd.setHourSelect(unitTime),bleCallback);
+                break;
+            case 12:
+               boolean onOff = (boolean) SPUtil.get(mContext, AppGlobal.DATA_ALERT_WRIST, true);
+                watch.sendCmd(BleCmd.setWristOnOff(onOff ? 1 : 0),bleCallback);
                 break;
 
         }

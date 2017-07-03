@@ -31,6 +31,7 @@ import com.manridy.iband.view.setting.TimeActivity;
 import com.manridy.iband.view.setting.UnitActivity;
 import com.manridy.iband.view.setting.ViewActivity;
 import com.manridy.iband.view.setting.WechatActivity;
+import com.manridy.iband.view.setting.WristActivity;
 import com.manridy.sdk.callback.BleCallback;
 import com.manridy.sdk.exception.BleException;
 
@@ -96,6 +97,8 @@ public class SettingActivity extends BaseActionActivity {
     MenuItems menuTarget;
     @BindView(R.id.menu_about)
     MenuItems menuAbout;
+    @BindView(R.id.menu_wrist)
+    MenuItems menuWrist;
 
     private String bindName;
     private int connectState;
@@ -156,7 +159,7 @@ public class SettingActivity extends BaseActionActivity {
             R.id.menu_alert, R.id.menu_wechat, R.id.menu_light,
             R.id.menu_unit, R.id.menu_time, R.id.menu_target,
             R.id.menu_about,R.id.rl_user_info,R.id.rl_device,
-            R.id.iv_user_icon})
+            R.id.iv_user_icon,R.id.menu_wrist})
     public void onClick(View view) {
         if (isFastDoubleClick()) return;
         switch (view.getId()) {
@@ -198,6 +201,9 @@ public class SettingActivity extends BaseActionActivity {
                 break;
             case R.id.menu_about:
                 startActivity(AboutActivity.class);
+                break;
+            case R.id.menu_wrist:
+                startActivity(WristActivity.class);
                 break;
         }
     }

@@ -132,6 +132,13 @@
                 app:menus_name="微信运动"/>
 
             <com.manridy.iband.ui.items.MenuItems
+                android:id="@+id/menu_wrist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:menus_icon="@mipmap/set_wrist"
+                app:menus_name="翻腕亮屏"/>
+
+            <com.manridy.iband.ui.items.MenuItems
                 android:id="@+id/menu_light"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
